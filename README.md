@@ -37,7 +37,7 @@ A sleek, responsive web application that calculates your exact age in years, mon
 
 ## Installation 📥
 
-No installation needed! Simply open `index.html` in any modern browser.
+No installation needed! Simply open `age_Cal+Gen.html` in any modern browser.
 
 ## Live Demo 🌐
 
