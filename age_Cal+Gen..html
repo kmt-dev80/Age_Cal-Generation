@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculation</title>
+    <style>
+        body {
+            background-color: #454040;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        } 
+       
+        .grid-container {
+            display: grid;
+            grid-gap: 25px;
+            padding: 5px;
+            justify-content: center;
+            grid-template-columns: repeat(4, minmax(100px, 120px));
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-top: 5px;
+            position: relative;
+            color: white;
+            width: 100%;
+        }
+
+        .container .label {
+            font-size: 15px;
+            padding-left: 10px;
+            position: absolute;
+            top: 13px;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .input {
+            width: 100%;
+            height: 40px;
+            border: none;
+            outline: none;
+            padding: 0px 7px;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 15px;
+            background-color: transparent;
+            box-shadow: 3px 3px 10px rgba(0,0,0,1),
+            -1px -1px 6px rgba(255, 255, 255, 0.4);
+        }
+
+        .input:focus {
+            border: 2px solid transparent;
+            color: #fff;
+            box-shadow: 3px 3px 10px rgba(0,0,0,1),
+            -1px -1px 6px rgba(255, 255, 255, 0.4),
+            inset 3px 3px 10px rgba(0,0,0,1),
+            inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+        }
+
+        .container .input:valid ~ .label,
+        .container .input:focus ~ .label {
+            transition: 0.3s;
+            padding-left: 2px;
+            transform: translateY(-35px);
+        }
+
+        .container .input:valid,
+        .container .input:focus {
+            box-shadow: 3px 3px 10px rgba(0,0,0,1),
+            -1px -1px 6px rgba(255, 255, 255, 0.4),
+            inset 3px 3px 10px rgba(0,0,0,1),
+            inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+        }
+        
+        .display {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+        
+        #submit-btn {
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        #submit-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .age-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: #333;
+            margin-top: 20px;
+        }
+
+        .age-box {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .age-box:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 10%;
+            right: 0;
+            height: 80%;
+            width: 2px;
+            background-color: white;
+        }
+        
+        #display {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center; 
+            color: azure; 
+            text-decoration: underline;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: rgb(86, 197, 201);
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: rgb(80, 238, 157);
+            margin: 5px 0;
+        }
+
+        .generation-info {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(3, minmax(100px, 120px));
+            }
+            
+            .age-box:not(:last-child)::after {
+                display: none;
+            }
+            
+            .age-box:not(:last-child) {
+                border-bottom: 2px solid white;
+                padding-bottom: 30px;
+                margin-bottom: 20px;
+            }
+            
+            .age-box {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: repeat(2, minmax(100px, 120px));
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+    <div class="grid-container">
+        <div class="container">
+            <input required type="number" id="day" class="input" placeholder="" min="1" max="31"
+                   onfocus="this.placeholder='birthday'" onblur="if(this.value===''){this.placeholder=''}">
+            <label class="label">Day</label>
+            <div id="day-error" class="error"></div>
+        </div>
+        <div class="container">
+            <input required type="number" id="month" class="input" placeholder="" min="1" max="12"
+                   onfocus="this.placeholder='birthmonth'" onblur="if(this.value===''){this.placeholder=''}">
+            <label class="label">Month</label>
+            <div id="month-error" class="error"></div>
+        </div>
+        <div class="container">
+            <input required type="number" id="year" class="input" placeholder="" min="1900" 
+                   onfocus="this.placeholder='birthyear'" onblur="if(this.value===''){this.placeholder=''}">
+            <label class="label">Year</label>
+            <div id="year-error" class="error"></div>
+        </div>
+        <div class="container">
+            <button type="button" id="submit-btn" class="input">Submit</button>
+        </div>
+    </div>
+    
+    <div id="display"></div>
+    <script>
+        document.getElementById('submit-btn').addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById('day-error').innerText = "";
+            document.getElementById('month-error').innerText = "";
+            document.getElementById('year-error').innerText = "";
+
+            let day = Number(document.getElementById('day').value.trim());
+            let month = Number(document.getElementById('month').value.trim());
+            let year = Number(document.getElementById('year').value.trim());
+
+            if (!day || !month || !year) {
+                if (!day) document.getElementById('day-error').innerText = "Required";
+                if (!month) document.getElementById('month-error').innerText = "Required";
+                if (!year) document.getElementById('year-error').innerText = "Required";
+                return;
+            }
+
+            if (day < 1 || day > 31) {
+                document.getElementById('day-error').innerText = "Invalid day";
+                return;
+            }
+
+            if (month < 1 || month > 12) {
+                document.getElementById('month-error').innerText = "Invalid month";
+                return;
+            }
+
+            const currentYear = new Date().getFullYear();
+            if (year < 1900 || year > currentYear) {
+                document.getElementById('year-error').innerText = "Invalid year";
+                return;
+            }
+
+            const inputDate = new Date(year, month - 1, day);
+            if (inputDate.getDate() !== day || inputDate.getMonth() !== month - 1 || inputDate.getFullYear() !== year) {
+                document.getElementById('day-error').innerText = "Invalid date";
+                return;
+            }
+
+            let today = new Date();
+            if (inputDate > today) {
+                document.getElementById('year-error').innerText = "Future date not allowed";
+                return;
+            }
+
+            // Calculate age
+            let ageYears = today.getFullYear() - inputDate.getFullYear();
+            let ageMonths = today.getMonth() - inputDate.getMonth();
+            let ageDays = today.getDate() - inputDate.getDate();
+
+            if (ageDays < 0) {
+                let prevMonthDays = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                ageMonths--;
+                ageDays += prevMonthDays;
+            }
+
+            if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+
+            // Calculate day of week born
+            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayOfWeek = daysOfWeek[inputDate.getDay()];
+
+            // Calculate next birthday countdown
+            let nextBirthday = new Date(today.getFullYear(), month - 1, day);
+            if (today > nextBirthday) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+            
+            const diffTime = nextBirthday - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            // Get generation info
+            const generation = getGeneration(year);
+
+            // Job application countdown (if under 32)
+            let timeRemain = "";
+            if (ageYears < 32) {
+                let targetDate = new Date(year + 32, month - 1, day);
+                let diffYears = targetDate.getFullYear() - today.getFullYear();
+                let diffMonths = targetDate.getMonth() - today.getMonth();
+                let diffDaysJob = targetDate.getDate() - today.getDate();
+
+                if (diffDaysJob < 0) {
+                    let prevMonthDays = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0).getDate();
+                    diffMonths--;
+                    diffDaysJob += prevMonthDays;
+                }
+
+                if (diffMonths < 0) {
+                    diffYears--;
+                    diffMonths += 12;
+                }
+
+                timeRemain = `
+                    <h3>Remaining Age for Job Application:</h3>
+                    <h4>${diffYears} years</h4>
+                    <h4>${diffMonths} months</h4>
+                    <h4>${diffDaysJob} days</h4>
+                `;
+            }
+
+            document.getElementById("display").innerHTML = 
+                `<div class="age-container">
+                    <div class="age-box">
+                        <h3>Your Age:</h3>
+                        <h4>${ageYears} years</h4>
+                        <h4>${ageMonths} months</h4>
+                        <h4>${ageDays} days</h4>
+                    </div>
+                    <div class="age-box">
+                        <h3>Birthday Info:</h3>
+                        <h4>Born on a ${dayOfWeek}</h4>
+                        <h4>Next birthday in ${diffDays} days</h4>
+                        <div class="generation-info">
+                            <h4>Generation: ${generation}</h4>
+                        </div>
+                    </div>
+                    <div class="age-box">${timeRemain}</div>
+                </div>`;
+        });
+
+        function getGeneration(year) {
+            if (year >= 2013) return "Generation Alpha";
+            if (year >= 1997) return "Generation Z";
+            if (year >= 1981) return "Millennials";
+            if (year >= 1965) return "Generation X";
+            if (year >= 1946) return "Baby Boomers";
+            if (year >= 1928) return "Silent Generation";
+            return "Greatest Generation";
+        }
+    </script>
+</body>
+</html>
