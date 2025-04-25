@@ -2,7 +2,7 @@
 
 A sleek, responsive web application that calculates your exact age in years, months, and days, along with additional birthday-related information.
 
-![Age Calculator Preview](https://i.imgur.com/JQZ5l0a.png) *(Replace with your actual screenshot)*
+![Age Calculator Preview]![age](https://github.com/user-attachments/assets/3d54c5ed-4381-450d-ad09-f2cb60f4fb4a).
 
 ## Features ✨
 
@@ -41,17 +41,13 @@ No installation needed! Simply open `index.html` in any modern browser.
 
 ## Live Demo 🌐
 
-[View Live Demo](https://github.com/kmt-dev80) *(Replace with your actual GitHub Pages link)*
+[View Live Demo](https://github.com/kmt-dev80)
 
 ## Future Enhancements 🚀
 
 - [ ] Add age in hours/minutes
 - [ ] Shareable results
 - [ ] Dark/light mode toggle
-
-## Contributing 🤝
-
-Pull requests are welcome! For major changes, please open an issue first.
 
 ## License 📄
 
