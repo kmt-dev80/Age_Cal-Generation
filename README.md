@@ -2,7 +2,7 @@
 
 A sleek, responsive web application that calculates your exact age in years, months, and days, along with additional birthday-related information.
 
-![Age Calculator Preview]![age](https://github.com/user-attachments/assets/3d54c5ed-4381-450d-ad09-f2cb60f4fb4a).
+![age](https://github.com/user-attachments/assets/3d54c5ed-4381-450d-ad09-f2cb60f4fb4a).
 
 ## Features ✨
 
