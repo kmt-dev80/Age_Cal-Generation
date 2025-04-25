@@ -15,7 +15,7 @@ A sleek, responsive web application that calculates your exact age in years, mon
 - **Generation Detection**:
   - Automatically identifies your generational cohort (Gen Z, Millennial, etc.)
 - **Job Application Helper**:
-  - Countdown timer showing remaining time until age 30 (for jobs with age limits)
+  - Countdown timer showing remaining time until age 32 (for jobs with age limits)
 - **Responsive Design**:
   - Works perfectly on all devices (mobile, tablet, desktop)
 
