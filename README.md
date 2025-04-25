@@ -41,7 +41,7 @@ No installation needed! Simply open `index.html` in any modern browser.
 
 ## Live Demo 🌐
 
-[View Live Demo](https://yourusername.github.io/age-calculator/) *(Replace with your actual GitHub Pages link)*
+[View Live Demo](https://github.com/kmt-dev80) *(Replace with your actual GitHub Pages link)*
 
 ## Future Enhancements 🚀
 
@@ -55,4 +55,4 @@ Pull requests are welcome! For major changes, please open an issue first.
 
 ## License 📄
 
-MIT © [Your Name](https://github.com/yourusername)
+MIT © [Takiul Hasan](https://github.com/kmt-dev80)
